@@ -1,6 +1,7 @@
 //
+//  Ashley Wu
 //  siete_y_medio.cpp
-//  HW1
+//  PIC_10C_HW1
 //
 //  some suggested libraries plus a stub for the main routine.
 //
@@ -25,6 +26,10 @@ using namespace std;
 
 // Stub for main
 int main(){
-    /* --STATEMENTS-- */
+    
+    
+    
+    
+    
     return 0;
 }

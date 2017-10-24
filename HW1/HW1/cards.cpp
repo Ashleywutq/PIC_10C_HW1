@@ -1,8 +1,8 @@
 //
+//  Ashley Wu
+//  PIC_10C_HW1
 //  cards.cpp
-//  HW1
-//
-//  an almost complete implementation of the Card class.
+//  implementation of the Card class.
 //
 
 #include "cards.h"

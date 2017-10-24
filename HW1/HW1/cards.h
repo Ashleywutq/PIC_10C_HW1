@@ -1,15 +1,8 @@
 //
+//  Ashley Wu
+//  PIC_10C_HW1
 //  cards.h
-//  HW1
-//
 //  a complete interface for the Card class plus templates for the Hand and Player interfaces.
-
-
-/* *************************************
- Ricardo Salazar, February 26, 2015
- 
- Interface of a simple Card class
- ************************************* */
 
 #include <string>
 #include <vector>
