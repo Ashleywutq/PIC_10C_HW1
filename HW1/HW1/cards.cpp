@@ -16,9 +16,9 @@
  */
 
 
-/* *************************************************
- Card class
- ************************************************* */
+///////////////////////////////////////////////////////////////////////////
+//card class
+////////////////////////////////////////////////////////////////////////////
 
 /*
  Default constructor for the Card class.
@@ -117,15 +117,64 @@ string Card::get_spanish_rank() const {
 // Accessor: returns a string with the suit of the card in English
 // This is just a stub! Modify it to your liking.
 string Card::get_english_suit() const {
-    return "";
+    string suitName;
+    switch (suit) {
+        case OROS:
+            suitName = "golds";
+            break;
+        case COPAS:
+            suitName = "cups";
+            break;
+        case ESPADAS:
+            suitName = "swords";
+            break;
+        case BASTOS:
+            suitName = "clubs";
+            break;
+        default: break;
+    }
+    return suitName;
 }
 
 // Accessor: returns a string with the rank of the card in English
 // This is just a stub! Modify it to your liking.
 string Card::get_english_rank() const {
-    return "";
+    string rankName;
+    switch (rank) {
+        case AS:
+            rankName = "ond";
+            break;
+        case DOS:
+            rankName = "two";
+            break;
+        case TRES:
+            rankName = "Three";
+            break;
+        case CUATRO:
+            rankName = "four";
+            break;
+        case CINCO:
+            rankName = "five";
+            break;
+        case SEIS:
+            rankName = "six";
+            break;
+        case SIETE:
+            rankName = "seven";
+            break;
+        case SOTA:
+            rankName = "ten";
+            break;
+        case CABALLO:
+            rankName = "eleven";
+            break;
+        case REY:
+            rankName = "twelve";
+            break;
+        default: break;
+    }
+    return rankName;
 }
-
 
 
 // Assigns a numerical value to card based on rank.
@@ -140,16 +189,58 @@ bool Card::operator < (Card card2) const {
     return rank < card2.rank;
 }
 
+//get the point of the card
+int Card::get_point() const{
+    int point=0;
+    if (this->get_rank()<8){
+        point = this->get_rank();
+    }else{
+        point = 0.5;
+    }
+    return point;
+}
+
+///////////////////////////////////////////////////////////////////////////
+//Hand class
+////////////////////////////////////////////////////////////////////////////
+
+// constructor
+Hand:: Hand(){}
+
+//add a card to the hand
+void Hand:: add(Card C){
+    v_.push_back(C);
+}
 
 
-/* *************************************************
- Hand class
- ************************************************* */
-// Implemente the member functions of the Hand class here.
+
+///////////////////////////////////////////////////////////////////////////
+//Player class
+////////////////////////////////////////////////////////////////////////////
+
+// constructor
+Player:: Player(int m){
+    money_=m;
+}
+
+//chekc if bet input is valid
+bool Player::check_bet(int bet){
+    if (bet > money_){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+//get private value money
+int Player::get_money() const{
+    return money_;
+}
 
 
 
-/* *************************************************
- Player class
- ************************************************* */
-// Implemente the member functions of the Player class here.
+
+
+
+

@@ -8,6 +8,7 @@
 #include <vector>
 #include <fstream>
 
+
 #ifndef CARDS_H
 #define CARDS_H
 
@@ -26,6 +27,9 @@ enum suit_t {OROS, COPAS, ESPADAS, BASTOS};
  */
 enum rank_t {AS, DOS, TRES, CUATRO, CINCO, SEIS, SIETE, SOTA=9, CABALLO=10, REY=11};
 
+///////////////////////////////////////////////////////////////////////////
+//card class
+////////////////////////////////////////////////////////////////////////////
 class Card {
 public:
     // Constructor assigns random rank & suit to card.
@@ -52,34 +56,45 @@ public:
     // Useful if you want to sort the cards.
     bool operator < (Card card2) const;
     
+    //get the point of the card
+    int get_point() const;
 private:
     suit_t suit;
     rank_t rank;
 };
 
+///////////////////////////////////////////////////////////////////////////
+//Hand class
+////////////////////////////////////////////////////////////////////////////
 
 class Hand {
 public:
-    // A vector of Cards
+    // create an empty hand
     Hand();
     
-    // You decide what functions you'll need...
+    // add a card to the back
+    void add(Card C);
     
 private:
-    // You decide what fields you'll need...
+    vector<Card> v_;
 };
 
-
+///////////////////////////////////////////////////////////////////////////
+//player class
+////////////////////////////////////////////////////////////////////////////
 class Player {
 public:
     // Constructor.
     //    Assigns initial amount of money
     Player(int m);
     
-    // You decide what functions you'll need...
+    // check if bet input is valid
+    bool check_bet(int bet);
     
+    //get money, return money
+    int get_money() const;
 private:
-    int money;
+    int money_;
     // You decide what extra fields (if any) you'll need...
 };
 
