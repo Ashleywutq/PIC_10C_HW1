@@ -2,7 +2,7 @@
 //  Ashley Wu
 //  PIC_10C_HW1
 //  cards.cpp
-//  implementation of the Card class.
+//  implementation of classes.
 //
 
 #include "cards.h"
@@ -190,8 +190,8 @@ bool Card::operator < (Card card2) const {
 }
 
 //get the point of the card
-int Card::get_point() const{
-    int point=0;
+double Card::get_point() const{
+    double point=0;
     if (this->get_rank()<8){
         point = this->get_rank();
     }else{
@@ -212,7 +212,15 @@ void Hand:: add(Card C){
     v_.push_back(C);
 }
 
+//get ith card
+Card Hand:: getcard(int i){
+    return v_[i];
+}
 
+//return vector size
+int Hand::size(){
+    return v_.size();
+}
 
 ///////////////////////////////////////////////////////////////////////////
 //Player class
@@ -225,11 +233,11 @@ Player:: Player(int m){
 
 //chekc if bet input is valid
 bool Player::check_bet(int bet){
-    if (bet > money_){
-        return false;
+    if (bet <= money_ && bet>=0){
+        return true;
     }
     else{
-        return true;
+        return false;
     }
 }
 
@@ -238,7 +246,10 @@ int Player::get_money() const{
     return money_;
 }
 
-
+//change money
+void Player::change_money(int change){
+    money_ +=change;
+}
 
 
 

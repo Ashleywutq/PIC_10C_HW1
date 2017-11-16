@@ -57,7 +57,7 @@ public:
     bool operator < (Card card2) const;
     
     //get the point of the card
-    int get_point() const;
+    double get_point() const;
 private:
     suit_t suit;
     rank_t rank;
@@ -75,6 +75,12 @@ public:
     // add a card to the back
     void add(Card C);
     
+    // get ith card
+    Card getcard(int i);
+    
+    //return vector size
+    int size();
+    
 private:
     vector<Card> v_;
 };
@@ -85,7 +91,7 @@ private:
 class Player {
 public:
     // Constructor.
-    //    Assigns initial amount of money
+    // Assigns initial amount of money
     Player(int m);
     
     // check if bet input is valid
@@ -93,6 +99,10 @@ public:
     
     //get money, return money
     int get_money() const;
+    
+    //change money
+    void change_money(int change);
+    
 private:
     int money_;
     // You decide what extra fields (if any) you'll need...
