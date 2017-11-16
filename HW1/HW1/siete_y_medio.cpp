@@ -32,10 +32,14 @@ void print_card (Card C){
 //main
 int main(){
     srand(time(nullptr));
+    ofstream log("gamelog.txt");
+    
+    
     
     //add two players
     Player P(100);
     int dealer=900;
+    int round=0;
     
     //start one round
     do{
@@ -43,6 +47,7 @@ int main(){
         double dealer_point=0;
         Hand player_hand;
         Hand dealer_hand;
+        round+=1;
         
         //get betnum input
         cout<<"You have $"<< P.get_money()<<". Enter bet:";
@@ -55,6 +60,9 @@ int main(){
             cin>>betnum;
         }
         
+        //write in log
+        log<<"--------------------------------------------------"<<endl<<endl<<"Game number: "<<round<<"        "<<"Money left: $"<<P.get_money()<<endl<<"Bet: "<<betnum;
+        
         //ask player for cards
         Card firstcard;
         cout<<"Your cards:"<<endl;
@@ -64,6 +72,7 @@ int main(){
         cout<<"Your total is "<<player_point<<". Do you want another card (y/n)";
         string ans;
         cin>>ans;
+        
         
         while (ans=="y"){
             //player draw a card, add to the hand
@@ -83,6 +92,15 @@ int main(){
             cout<<"Your total is "<<player_point<<". Do you want another card (y/n)?";
             cin>>ans;
         }
+        
+        //write in log
+        log<<endl<<endl<<"Your cards:" <<endl;
+        for (int i=0; i<player_hand.size();++i){
+            string s_name = player_hand.getcard(i).get_spanish_rank() + " de " + player_hand.getcard(i).get_spanish_suit();
+            string e_name = player_hand.getcard(i).get_english_suit() + " of " + player_hand.getcard(i).get_english_rank();
+            log<<"     "<<setw(20)<<left<<s_name<<"("<<e_name<<")."<<endl;
+        }
+        log<<"Your total is: "<<player_point<<"."<<endl<<endl;
         
         //ask dealer for card
         Card dealerfirstcard;
@@ -108,6 +126,15 @@ int main(){
             cout<<"The dealer's total is "<<dealer_point<<"."<<endl;
         }
         
+        //write in log
+        log<<endl<<endl<<"Dealer's cards:" <<endl;
+        for (int i=0; i<dealer_hand.size();++i){
+            string s_name = dealer_hand.getcard(i).get_spanish_rank() + " de " + dealer_hand.getcard(i).get_spanish_suit();
+            string e_name = dealer_hand.getcard(i).get_english_suit() + " of " + dealer_hand.getcard(i).get_english_rank();
+            log<<"     "<<setw(20)<<left<<s_name<<"("<<e_name<<")."<<endl;
+        }
+        log<<"Dealer's total is: "<<dealer_point<<"."<<endl<<endl;
+        
         //determine result
         if (player_point>7.5){
             P.change_money(-1*betnum);
@@ -130,14 +157,17 @@ int main(){
         }
     }while(P.get_money()>0 && dealer>0);
     
-    //exit sentence 
+    //exit sentence
     if(P.get_money()==0){
         cout<<"You have $0. GAME OVER!"<<endl<<"Come back when you have more money."<<endl<<endl<<"Bye!";
     }else{
         cout<<"Congratulations. You beat the casino!"<<endl<<endl<<"Bye!";
     }
-   
     
+    
+    log<<"--------------------------------------------------";
+    log.flush();
+    log.close();
     
     return 0;
 }
